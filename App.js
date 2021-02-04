@@ -1,8 +1,8 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
+import {TaskProvider} from './src/context/TaskContext';
 
 const navigator = createStackNavigator({
       Home: HomeScreen 
@@ -13,18 +13,12 @@ const navigator = createStackNavigator({
     }
 });
 
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
 const App = createAppContainer(navigator);
 
 export default () => {
-  return <App />;
+  return (
+    <TaskProvider>
+        <App />
+    </TaskProvider>
+  );
 };
