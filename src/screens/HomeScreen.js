@@ -1,15 +1,16 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, FlatList} from 'react-native';
-import TaskContext from '../context/TaskContext';
+import { StyleSheet, Text, View, FlatList, Button} from 'react-native';
+import {Context} from '../context/TaskContext';
  
 
 const HomeScreen = () => {
-    const taskPosts = useContext(TaskContext);
+    const {state, addTasks} = useContext(Context);
 
     return (<View>
         <Text>Home screen</Text>
+        <Button title="Add Task" onPress={addTasks}/>
         <FlatList 
-            data={taskPosts}
+            data={state}
             keyExtractor={(taskPosts) => taskPosts.title}
             renderItem={({item}) => {
                 return <Text>{item.title}</Text>
