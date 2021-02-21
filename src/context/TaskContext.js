@@ -10,7 +10,8 @@ const taskReducer = (state,action) => {
                 ...state, 
                 {
                     id: Math.floor(Math.random() * 99999),
-                    title: `Tasks #${state.length + 1}`
+                    title: action.payload.title,
+                    content: action.payload.content
                 }
             ];
         default:
@@ -19,8 +20,8 @@ const taskReducer = (state,action) => {
 };
 
 const addTasks = dispatch => {
-    return () => {
-        dispatch({type: 'add_task'});
+    return (title, content) => {
+        dispatch({type: 'add_task', payload:{ title, content} });
     };
 };
 
