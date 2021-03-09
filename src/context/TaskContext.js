@@ -19,9 +19,10 @@ const taskReducer = (state,action) => {
     }
 };
 
-const addTasks = dispatch => {
-    return (title, content) => {
+const addTask = dispatch => {
+    return (title, content, callback) => {
         dispatch({type: 'add_task', payload:{ title, content} });
+        callback();
     };
 };
 
@@ -33,6 +34,6 @@ const deleteTask = dispatch => {
 
 export const {Context, Provider} = createDataContext(
     taskReducer,
-    {addTasks, deleteTask},
+    {addTask, deleteTask},
     []
 );

@@ -16,8 +16,9 @@ const CreateScreen = ({ navigation }) => {
             <Button 
                title="Add Task" 
                onPress={() => {
-                   addTask(title,content);
-                   navigation.navigate("Home");
+                   addTask(title,content, () => {
+                        navigation.navigate("Home");
+                   });
                 }}
             />
         </View>

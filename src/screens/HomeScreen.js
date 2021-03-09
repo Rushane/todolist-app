@@ -4,11 +4,10 @@ import {Context} from '../context/TaskContext';
 import {Feather} from '@expo/vector-icons';
  
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const {state, addTasks, deleteTask} = useContext(Context);
 
     return (<View>
-        <Button title="Add Task" onPress={addTasks}/>
         <FlatList 
             data={state}
             keyExtractor={(taskPosts) => taskPosts.title}
