@@ -1,44 +1,21 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { StyleSheet, Button } from 'react-native';
+import TaskPostForm from '../components/TaskPostForm';
 import { Context } from '../context/TaskContext';
 
 const CreateScreen = ({ navigation }) => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
     const { addTask } = useContext(Context);
 
     return (
-        <View>
-            <Text style={styles.label}>Enter Title</Text>
-            <TextInput style={styles.input} value={title} onChangeText={text => setTitle(text)} />
-            <Text style={styles.label}>Enter Content:</Text>
-            <TextInput style={styles.input} value={content} onChangeText={text => setContent(text)}  />
-            <Button 
-               title="Add Task" 
-               onPress={() => {
-                   addTask(title,content, () => {
-                        navigation.navigate("Home");
-                   });
-                }}
-            />
-        </View>
-  );
+        <TaskPostForm onSubmit={(title, content) => {
+            addTask(title,content, () => navigation.navigate('Home'));
+        }} 
+        />
+    )
 };
 
 const styles = StyleSheet.create({
-    input: {
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'black',
-        marginBottom: 15, 
-        padding: 5,
-        margin: 5
-    },
-    label: {
-        fontSize: 20,
-        marginBottom: 5,
-        marginLeft: 5
-    }
+    
 });
 
 export default CreateScreen;

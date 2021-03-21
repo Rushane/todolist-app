@@ -3,6 +3,12 @@ import createDataContext from './createDataContext';
 
 const taskReducer = (state,action) => {
     switch(action.type) {
+        case 'edit_task':
+            return state.map(taskPost => {
+                taskPost.id === action.payload.id 
+                ? action.payload : 
+                taskPost;
+            });
         case 'delete_task':
             return state.filter(taskPosts => taskPosts.id !== action.payload )
         case 'add_task':
@@ -22,7 +28,21 @@ const taskReducer = (state,action) => {
 const addTask = dispatch => {
     return (title, content, callback) => {
         dispatch({type: 'add_task', payload:{ title, content} });
-        callback();
+        if(callback) {
+            callback();
+        }
+    };
+};
+
+const editTask = dispatch => {
+    return (id, title, content, callback) => {
+        dispatch({
+            type: 'edit_task',
+            payload: {id, title, content}
+        });
+        if(callback) {
+            callback();
+        }
     };
 };
 
@@ -34,6 +54,6 @@ const deleteTask = dispatch => {
 
 export const {Context, Provider} = createDataContext(
     taskReducer,
-    {addTask, deleteTask},
+    {addTask, deleteTask, editTask},
     []
 );
